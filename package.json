@@ -8,8 +8,7 @@
         "watch": "ng build --watch --configuration development",
         "build:prod": "ng build --configuration production",
         "test": "ng test",
-        "heroku-postbuild": "ng build --prod",
-        "test:headless": "ng test --watch=false --browsers=ChromeHeadless"
+        "heroku-postbuild": "ng build --prod"
     },
     "private": true,
     "dependencies": {
