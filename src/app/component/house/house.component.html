@@ -1,0 +1,87 @@
+<div class="row my-3">
+    <div class="col-md-6">
+        <h2>List House</h2>
+    </div>
+    <div class="col-md-6 text-end">
+        <button class="btn btn-primary" (click)="openPopup()"> <i class="fa fa-plus" aria-hidden="true"></i></button>
+    </div>
+</div>
+<div class="row mt-5">
+    <div class="col-6 mx-auto">
+        <div class="card mt-5   " *ngFor="let house of houses">
+            <div [ngClass]="{'bg-success':house.status ==='ON','bg-danger':house.status ==='OFF'}">
+                <i class="fa fa-toggle-off p-3" (click)="changeStatus(house)" *ngIf="house.status == 'OFF'" style="font-size:40px;"></i>
+                <i class="fa fa-toggle-on p-3" (click)="changeStatus(house)" *ngIf="house.status == 'ON'" style="font-size:40px;"></i>
+            </div>
+            <div class="card-body text-center">
+                <h4 class="card-title"><u>{{house.name}}</u></h4>
+                <h5 class="card-title">{{house.address}}</h5>
+                <h5 class="card-title">Floor : <strong class="text-primary">{{house.name_floor}} </strong> Room : <strong class="text-primary">{{house.name_room}}</strong> Device : <strong class="text-primary">{{house.name_device}}</strong></h5>
+                <p class="card-text">{{house.status}}</p>
+                <div>
+                    <button class="btn btn-warning mx-2" (click)="editHouse(house)">update</button>
+                    <button class="btn btn-danger" (click)="Delete(house)">Delete</button>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+<div class="modal" tabindex="-1" role="dialog" [ngStyle]="{'display':displayStyle}">
+    <div class="modal-dialog" role="document">
+        <form>
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title">House</h4>
+                    <button type="button" (click)="closePopup()" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+
+                </div>
+
+
+                <div class="modal-body">
+
+                    <div class="form-group mt-3">
+                        <label for="House">Name House</label>
+                        <input type="text" [(ngModel)]="house.name" class="form-control" id="name" name="name" aria-describedby="name" placeholder="Enter name">
+                    </div>
+                    <div class="form-group mt-3">
+                        <label for="Address">Address</label>
+                        <input type="text" [(ngModel)]="house.address" class="form-control" id="address" name="address" aria-describedby="address" placeholder="Enter address">
+                    </div>
+                    <div class="form-group mt-3">
+                        <label for="Floor">Name Floor</label>
+                        <input type="text" [(ngModel)]="house.name_floor" class="form-control" id="name_floor" name="name_floor" aria-describedby="name_floor" placeholder="Enter  Floor">
+                    </div>
+                    <div class="form-group mt-3">
+                        <label for="Room">Name Room</label>
+                        <input type="text" [(ngModel)]="house.name_room" class="form-control" id="name_room" name="name_room" aria-describedby="name_room" placeholder="Enter  Room">
+                    </div>
+                    <div class="form-group mt-3">
+                        <label for="Device">Name Device</label>
+                        <input type="text" [(ngModel)]="house.name_device" class="form-control" id="name_device" name="name_device" aria-describedby="name_device" placeholder="Enter  Device">
+                    </div>
+                    <div class="form-group mt-3">
+                        <label>Status : </label>
+                        <select class="form-control" [(ngModel)]="house.status" id="status" name="status">
+                          <option value="" disabled selected>Choisir</option>
+                          <option value="ON" selected>ON</option> 
+                          <option value="OFF" selected>OFF</option> 
+                        </select>
+                    </div>
+
+                </div>
+                <div class="modal-footer">
+                    <button type="button" *ngIf="!StatusButton" (click)="updateHouse()" class="btn btn-success ">Update</button>
+                    <button type="button" *ngIf="StatusButton" (click)="createHouse()" class="btn btn-primary ">Save</button>
+                    <button type="button" class="btn btn-danger" (click)="closePopup()">
+                 Close
+             </button>
+                </div>
+            </div>
+        </form>
+
+    </div>
+</div>

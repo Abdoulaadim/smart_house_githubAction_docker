@@ -1,0 +1,35 @@
+<div class="row mt-4">
+    <div class="col-md-6 mx-auto">
+        <div class="card">
+            <div class="card-body">
+
+                <h1 class="text-center">
+                    <span class="text-success">
+                        <i class="fa fa-lock" aria-hidden="true"></i> Register 
+                    </span>
+                </h1>
+
+                <form (ngSubmit)="onRegister()">
+                    <div class="div form-group mt-3">
+                        <label for="">Nom</label>
+                        <input type="text" class="form-control m-2" id="nom" name="nom" [(ngModel)]="user.nom">
+                    </div>
+                    <div class="div form-group mt-3">
+                        <label for="">Prenom</label>
+                        <input type="text" class="form-control m-2" id="prenom" name="prenom" [(ngModel)]="user.prenom">
+                    </div>
+                    <div class="div form-group mt-3">
+                        <label for="">Email</label>
+                        <input type="text" class="form-control m-2" id="email" name="email" [(ngModel)]="user.email">
+                    </div>
+                    <div class="div form-group mt-3">
+                        <label for="">Password</label>
+                        <input type="password" class="form-control m-2" id="password" name="password" [(ngModel)]="user.password">
+                    </div>
+
+                    <input type="submit" value="Register" class="btn btn-success w-100 mt-3">
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
