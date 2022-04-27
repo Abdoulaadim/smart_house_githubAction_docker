@@ -6,7 +6,7 @@
         "start": "node server.js",
         "build": "ng build",
         "watch": "ng build --watch --configuration development",
-        "build:prod": "ng build --configuration production --base-href https://abdoulaadim.github.io/smarthousefront/",
+        "build:prod": "ng build --configuration production --base-href=https://abdoulaadim.github.io/smarthousefront/",
         "test": "ng test",
         "heroku-postbuild": "ng build --prod",
         "test:headless": "ng test --watch=false --browsers=ChromeHeadless"
