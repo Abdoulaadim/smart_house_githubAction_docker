@@ -1,7 +1,7 @@
 FROM node:alpine as build
 RUN mkdir -p /build
 WORKDIR /app
-EXPOSE ${8080}
+
 
 COPY package.json /app/
 RUN  npm install
@@ -11,6 +11,9 @@ COPY . /app/
 RUN npm run build  --prod
 
 FROM nginx:alpine
+
+COPY ./nginx.config /etc/nginx/nginx.template
+CMD ["/bin/sh", "-c", "envsubst < /etc/nginx/nginx.template > /etc/nginx/conf.d/default.conf && nginx -g 'daemon off;'"]
 
 COPY --from=build /app/dist/smarthouse /usr/share/nginx/html
 
