@@ -1,17 +1,18 @@
-# FROM node:alpine as build
-# RUN mkdir -p /build
-# WORKDIR /app
+FROM node:alpine as build
+RUN mkdir -p /build
+WORKDIR /app
+EXPOSE ${8080}
 
-# COPY package.json /app/
-# RUN  npm install
+COPY package.json /app/
+RUN  npm install
 
-# COPY . /app/
+COPY . /app/
 
-# RUN npm run build  --prod
+RUN npm run build  --prod
 
-# FROM nginx:alpine
+FROM nginx:alpine
 
-# COPY --from=build /app/dist/smarthouse /usr/share/nginx/html
+COPY --from=build /app/dist/smarthouse /usr/share/nginx/html
 
 
 
@@ -69,23 +70,23 @@
 # COPY --from=builder /opt/web/dist/smarthouse /usr/share/nginx/html
 
 
-FROM node:alpine as build
-RUN mkdir -p /build
-WORKDIR /app
+# FROM node:alpine as build
+# RUN mkdir -p /build
+# WORKDIR /app
 
-COPY package.json /app/
-RUN  npm install
+# COPY package.json /app/
+# RUN  npm install
 
-COPY . /app/
+# COPY . /app/
 
-RUN npm run build  --prod
+# RUN npm run build  --prod
 
-FROM nginx:alpine
+# FROM nginx:alpine
 
-RUN curl -L https://github.com/a8m/envsubst/releases/download/v1.1.0/envsubst-`uname -s`-`uname -m` -o envsubst && \
-    chmod +x envsubst && \
-    mv envsubst /usr/local/bin
-COPY ./nginx.config /etc/nginx/nginx.template
-CMD ["/bin/sh", "-c", "envsubst < /etc/nginx/nginx.template > /etc/nginx/conf.d/default.conf && nginx -g 'daemon off;'"]
+# RUN curl -L https://github.com/a8m/envsubst/releases/download/v1.1.0/envsubst-`uname -s`-`uname -m` -o envsubst && \
+#     chmod +x envsubst && \
+#     mv envsubst /usr/local/bin
+# COPY ./nginx.config /etc/nginx/nginx.template
+# CMD ["/bin/sh", "-c", "envsubst < /etc/nginx/nginx.template > /etc/nginx/conf.d/default.conf && nginx -g 'daemon off;'"]
 
-COPY --from=build /app/dist/smarthouse /usr/share/nginx/html
+# COPY --from=build /app/dist/smarthouse /usr/share/nginx/html
