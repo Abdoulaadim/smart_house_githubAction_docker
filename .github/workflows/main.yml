@@ -26,15 +26,15 @@ jobs:
     - name: Build
       run: npm run build --if-present
 
-    # - uses: mr-smithers-excellent/docker-build-push@v5
-    #   name: Build & push Docker image
-    #   with:
-    #     image: dockerabdoulaadim/smarthouse
-    #     tags: latest
-    #     registry: docker.io
-    #     dockerfile: Dockerfile
-    #     username: ${{ secrets.DOCKER_USERNAME }}
-    #     password: ${{ secrets.DOCKER_PASSWORD }}
+    - uses: mr-smithers-excellent/docker-build-push@v5
+      name: Build & push Docker image
+      with:
+        image: dockerabdoulaadim/smarthouse
+        tags: latest
+        registry: docker.io
+        dockerfile: Dockerfile
+        username: ${{ secrets.DOCKER_USERNAME }}
+        password: ${{ secrets.DOCKER_PASSWORD }}
 
       
     - uses: gonuit/heroku-docker-deploy@v1.3.3 # GitHub action name (leave it as it is).
